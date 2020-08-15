@@ -3,16 +3,15 @@ const app = express();
 const Post = require("./api/models/post");
 const postsData = new Post();
 
-app.get("/api/posts", (req, res)=>{
 
-    const test  = {
-        "testing": "testing"
-    }
-    
-    res.status(200).send(postsData.get());
+app.use((req, res, next)=> {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    next();
 });
 
-app.get("/api/posts/:post_id", (req, res) => {
+app.use('/uploads', express.static('uploads'));
+
+app.get("/api/posts/:post_id", (req, res)=> {
     const postId = req.params.post_id;
     const foundPost = postsData.getIndividualBlog(postId);
     if(foundPost) {

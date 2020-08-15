@@ -1,5 +1,6 @@
 const PATH ="./data.json";
 const fs = require('fs');
+const { raw } = require('express');
 
 class Posts {
     
@@ -10,7 +11,7 @@ class Posts {
 
     getIndividualBlog(postId) {
         const post = this.readData();
-        const foundPost = post.find((post) => post.id == postId);
+        const foundPost = post.find((post)=> post.id == postId);
         return foundPost;
     }
 
